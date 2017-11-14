@@ -6,9 +6,10 @@
 
 </head>
 <body>
-<form method="post" action="login">{% csrf_token %}
-    User Name : <input name="u_name" id="u_name" type="text"/>
+<form method="get" action="login">
+    User_Name : <input name="u_name" id="u_name" type="text"/>
     Password : <input name="id_password" id="id_password" type="password"/>
+
     <input type="submit" name="submit">
 </form>
 </body>
