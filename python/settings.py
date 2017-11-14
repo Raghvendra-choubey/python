@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'python.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'sqlserver_ado',
-        'NAME': 'jewel_sumit',
-        'HOST': 'jeweldb2014',
-        'USER': 'jewelerp',
-        'PASSWORD': 'Diaspark200',
+        'NAME': 'hibernatedb',
+        'HOST': 'RAGHVENDRA-CHOU\SQLEXPRE2014',
+        'USER': 'sa',
+        'PASSWORD': 'diaspark',
 
     }
 }
