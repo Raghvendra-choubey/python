@@ -6,12 +6,17 @@
 
 </head>
 <body>
-<form method="post" action="login">
-    {% csrf_token %}
-    User_Name : <input name="u_name" id="u_name" type="text"/>
-    Password : <input name="id_password" id="id_password" type="password"/>
 
-    <input type="submit" name="submit">
-</form>
+<center>
+    <H1>LOGIN</H1><br>
+    <p>{{ dict.message }}</p>
+    <form method="post" action="login">{% csrf_token %}
+        USER :&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;<input name="u_name" id="u_name" type="text"/><br>
+        <br>
+        PASSWORD : <input name="id_password" id="id_password" type="password"/>
+        <br><br>
+        <input type="submit" name="submit">
+    </form>
+</center>
 </body>
 </html>

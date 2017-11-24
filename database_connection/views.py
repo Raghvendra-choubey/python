@@ -1,5 +1,4 @@
 # Create your views here.
-from collections import namedtuple
 
 from django.shortcuts import render
 
@@ -10,11 +9,12 @@ def index(request):
     return render(request, 'index.html')
 
 
+'''
 def namedtuplefetchall(cursor):
     desc = cursor.description
     nt_result = namedtuple('Result', [col[0] for col in desc])
     return [nt_result(*row) for row in cursor.fetchall()]
-
+'''
 
 def login(request):
     # request.
@@ -33,12 +33,20 @@ def login(request):
     else:
         return render(request, 'index.html')
     '''
-    login_user = Users.objects.filter(id=u_name)
-    login_user_password = login_user[0].password
-    print(login_user_password)
-    print(id_password)
-    if login_user_password.upper().strip() == id_password.upper().strip():
-        dict = {'user': u_name}
-        return render(request, 'home.html', {'dict': dict})
+    login_user = Users.objects.filter(id=u_name, trans_flag='A')
+    if login_user.__len__() > 0:
+        login_user_password = login_user[0].password
+        print(login_user_password)
+        print(id_password)
+        if login_user_password.upper().strip() == id_password.upper().strip():
+            # dict = {'user': u_name}
+            return render(request, 'home.html', {'dict': {'user': u_name}})
+        else:
+            return render(request, 'index.html', {'dict': {'message': 'ID & Password do not match.'}})
     else:
-        return render(request, 'index.html')
+        return render(request, 'index.html', {'dict': {'message': 'User does not exist or deactivated.'}})
+
+
+def create_user(request):
+    # request
+    print("hello")
