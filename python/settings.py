@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'python.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'sqlserver_ado',
-        'NAME': 'hibernatedb',
+        'NAME': 'jewel_demo',
         'HOST': 'RAGHVENDRA-CHOU\SQLEXPRE2014',
         'USER': 'sa',
         'PASSWORD': 'diaspark',

@@ -1,8 +1,9 @@
 # Create your views here.
 from collections import namedtuple
 
-from django.db import connection
 from django.shortcuts import render
+
+from database_connection.models import Users
 
 
 def index(request):
@@ -17,14 +18,27 @@ def namedtuplefetchall(cursor):
 
 def login(request):
     # request.
-    u_name = request.GET.get("u_name")
-    id_password = request.GET.get("id_password")
+    u_name = request.POST.get("u_name")
+    id_password = request.POST.get("id_password")
 
-    print("u_name", u_name)
-    print("password", id_password)
-    print("select COUNT(*) as c_count from UserDetails where userterms ='" + u_name + "'")
-    cursor = connection.cursor()
-    cursor.execute("select COUNT(*) as c_count from UserDetails where userterms ='" + u_name + "'")
+    # print("u_name", u_name)
+    # print("password", id_password)
+    # print("select COUNT(*) as c_count from UserDetails where userterms ='" + u_name + "'")
+    '''cursor = connection.cursor()
+    cursor.execute("select COUNT(*) as c_count from sysmmsuser where id ='" + u_name + "' and password='"+id_password+"'")
     results = namedtuplefetchall(cursor)
-    print(results[0].c_count)
-    return render(request, 'login.html')
+    if results[0].c_count >= 1:
+        dict = {'user': u_name}
+        return render(request, 'home.html', {'dict': dict})
+    else:
+        return render(request, 'index.html')
+    '''
+    login_user = Users.objects.filter(id=u_name)
+    login_user_password = login_user[0].password
+    print(login_user_password)
+    print(id_password)
+    if login_user_password.upper().strip() == id_password.upper().strip():
+        dict = {'user': u_name}
+        return render(request, 'home.html', {'dict': dict})
+    else:
+        return render(request, 'index.html')
